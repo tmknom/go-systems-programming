@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"compress/gzip"
+	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -13,7 +14,24 @@ import (
 )
 
 func main() {
-	text()
+	exercises2()
+}
+
+func exercises2() {
+	const filename = "test.csv"
+	file, _ := os.Create(filename)
+	writer := csv.NewWriter(file)
+	writer.Write([]string{"\"foo", "bar", "baz"})
+	writer.Write([]string{"1", "2", "3", "4"})
+	writer.Flush()
+	file.Close()
+	os.Remove(filename)
+}
+
+func exercises1() {
+	fmt.Fprintf(os.Stdout, "format: %s\n", "文字列だよ")
+	fmt.Fprintf(os.Stdout, "format: %d\n", 100)
+	fmt.Fprintf(os.Stdout, "format: %f\n", 3.14)
 }
 
 func text() {
