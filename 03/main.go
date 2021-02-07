@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"crypto/rand"
 	"encoding/binary"
 	"encoding/csv"
 	"fmt"
@@ -18,7 +19,39 @@ import (
 )
 
 func main() {
-	tee()
+	exercises3()
+}
+
+func exercises3() {
+	//buffer := make([]byte, 1024)
+	//rand.Reader.Read(buffer)
+	//
+	//bin, err := os.Create("random.dat")
+	//exitIfError(err)
+	//defer bin.Close()
+	//bin.Write(buffer)
+}
+
+func exercises2() {
+	buffer := make([]byte, 1024)
+	rand.Reader.Read(buffer)
+
+	bin, err := os.Create("random.dat")
+	exitIfError(err)
+	defer bin.Close()
+	bin.Write(buffer)
+}
+
+func exercises1() {
+	src, err := os.Open("Lenna.png")
+	exitIfError(err)
+	defer src.Close()
+
+	dest, err := os.Create("CopyLenna.png")
+	exitIfError(err)
+	defer dest.Close()
+
+	io.Copy(dest, src)
 }
 
 func tee() {
